@@ -51,7 +51,7 @@ jobs:
       
       - name: Check for vulnerabilities
         run: |
-          if grep -q '"type": "vulnerability"' oast-results.json; then
+          if [ $(jq '.vulnerabilities | length' oast-results.json) -gt 0 ]; then
             echo "Vulnerabilities found!"
             exit 1
           fi
