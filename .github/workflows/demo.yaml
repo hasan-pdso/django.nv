@@ -60,7 +60,8 @@ jobs:
         with:
           name: Safety
           path: oast-results.json
-
+        if: always()                        # what is this for?
+        
   integration:
     runs-on: ubuntu-20.04
     needs: oast
