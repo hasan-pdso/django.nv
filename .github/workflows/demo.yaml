@@ -48,6 +48,13 @@ jobs:
       - uses: actions/checkout@v2
 
       - run: docker run --rm -v $(pwd):/src hysnsec/safety check -r requirements.txt --json | tee oast-results.json
+      
+      - name: Check for vulnerabilities
+        run: |
+          if grep -q '"type": "vulnerability"' oast-results.json; then
+            echo "Vulnerabilities found!"
+            exit 1
+          fi
 
       - uses: actions/upload-artifact@v2
         with:
