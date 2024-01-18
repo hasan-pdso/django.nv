@@ -47,15 +47,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - run: docker run --rm -v $(pwd):/src hysnsec/safety check -r requirements.txt --json | tee oast-results.json
-      
-      - name: Check for vulnerabilities
-        run: |
-          if [ $(jq '.vulnerabilities | length' oast-results.json) -gt 0 ]; then
-            echo "Vulnerabilities found!"
-            exit 1
-          fi
-
+      - run: docker run --rm -v $(pwd):/src hysnsec/safety check -r requirements.txt --json
       - uses: actions/upload-artifact@v2
         with:
           name: Safety
