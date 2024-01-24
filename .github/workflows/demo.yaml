@@ -66,5 +66,5 @@ jobs:
   prod:
     runs-on: ubuntu-20.04
     needs: integration
-    steps:
+    steps: 
       - run: echo "This is a deploy step."
